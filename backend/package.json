@@ -1,0 +1,52 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Digital Wardrobe API",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src tests scripts",
+    "lint:fix": "eslint src tests scripts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "setup:storage": "tsx scripts/setupStorage.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.2.0",
+    "@types/node": "^26.3.0",
+    "@types/supertest": "^7.2.1",
+    "eslint": "^10.9.1",
+    "eslint-config-prettier": "^10.1.8",
+    "jest": "^30.4.2",
+    "prettier": "^3.9.6",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.12",
+    "tsc-alias": "^1.9.2",
+    "tsx": "^4.23.12",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.68.0"
+  }
+}

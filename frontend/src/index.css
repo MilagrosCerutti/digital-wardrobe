@@ -1,0 +1,271 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens reproduced from the approved HomePage reference
+ * (https://digital-wardrobe-pastel.lovable.app), extracted from its
+ * compiled stylesheet. Colors use OKLCH to match the reference exactly.
+ */
+:root {
+  --radius: 0.25rem;
+
+  --background: oklch(97.5% 0.012 20);
+  --foreground: oklch(28% 0.03 350);
+
+  --card: oklch(99.5% 0.006 60);
+  --card-foreground: oklch(28% 0.03 350);
+
+  --popover: oklch(99.5% 0.006 60);
+  --popover-foreground: oklch(28% 0.03 350);
+
+  --primary: oklch(66% 0.16 5);
+  --primary-foreground: oklch(99% 0.005 60);
+
+  --secondary: oklch(93% 0.035 340);
+  --secondary-foreground: oklch(35% 0.05 350);
+
+  --muted: oklch(95.5% 0.018 340);
+  --muted-foreground: oklch(55% 0.045 350);
+
+  --accent: oklch(90% 0.05 300);
+  --accent-foreground: oklch(32% 0.05 320);
+
+  --destructive: oklch(60% 0.19 20);
+  --destructive-foreground: oklch(99% 0.005 60);
+
+  --border: oklch(86% 0.045 345);
+  --input: oklch(86% 0.045 345);
+  --ring: oklch(72% 0.12 350);
+
+  /* Extended pastel Y2K palette */
+  --blush: oklch(94% 0.035 350);
+  --bubble: oklch(87% 0.075 350);
+  --rose: oklch(66% 0.16 5);
+  --lilac: oklch(87% 0.06 300);
+  --lavender: oklch(93% 0.035 295);
+  --cream: oklch(97.5% 0.02 90);
+  --paper: oklch(99% 0.008 70);
+  --ink: oklch(28% 0.03 350);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-blush: var(--blush);
+  --color-bubble: var(--bubble);
+  --color-rose: var(--rose);
+  --color-lilac: var(--lilac);
+  --color-lavender: var(--lavender);
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+
+  --font-sans: 'Space Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-hand: 'Caveat', 'Space Mono', cursive;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/*
+ * Digital Wardrobe decorative/interaction primitives ("dw-*"), reproduced
+ * from the approved HomePage reference. Reused as-is so every page shares
+ * the same visual vocabulary rather than inventing a parallel one.
+ */
+@layer components {
+  .dw-panel {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .dw-panel-pink {
+    background: var(--blush);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .dw-chrome {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in oklab, var(--bubble) 45%, var(--paper));
+  }
+
+  .dw-hand {
+    font-family: var(--font-hand);
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .dw-micro {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    font-size: 0.625rem;
+  }
+
+  .dw-lift {
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.4s;
+  }
+
+  .dw-lift:hover {
+    box-shadow: 0 8px 0 -4px color-mix(in oklab, var(--bubble) 70%, transparent);
+    transform: translateY(-6px);
+  }
+
+  .dw-tape {
+    background: color-mix(in oklab, var(--lavender) 80%, transparent);
+    border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+    width: 4.5rem;
+    height: 1.25rem;
+    opacity: 0.9;
+    position: absolute;
+  }
+
+  .dw-dotgrid {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--rose) 18%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  .dw-grain {
+    position: relative;
+  }
+
+  .dw-grain::after {
+    content: '';
+    pointer-events: none;
+    opacity: 0.5;
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--rose) 22%, transparent) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 5px 5px;
+  }
+
+  .dw-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dw-reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .dw-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+  }
+
+  .dw-float-mid {
+    animation: float-mid 4.5s ease-in-out infinite;
+  }
+
+  .dw-idle {
+    animation: idle 3s ease-in-out infinite;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  to {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-14px) rotate(calc(var(--tilt, 0deg) + 2deg));
+  }
+}
+
+@keyframes float-mid {
+  0%,
+  to {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(calc(var(--tilt, 0deg) - 2deg));
+  }
+}
+
+@keyframes idle {
+  0%,
+  to {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.008);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(-50%);
+  }
+}
+
+@keyframes blink {
+  0%,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

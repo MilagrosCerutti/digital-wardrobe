@@ -1,0 +1,41 @@
+export class AppError extends Error {
+  public readonly statusCode: number;
+  public readonly isOperational: boolean;
+
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.statusCode = statusCode;
+    this.isOperational = true;
+    Object.setPrototypeOf(this, AppError.prototype);
+  }
+}
+
+export class NotFoundError extends AppError {
+  constructor(message = 'Resource not found') {
+    super(message, 404);
+  }
+}
+
+export class UnauthorizedError extends AppError {
+  constructor(message = 'Authentication is required') {
+    super(message, 401);
+  }
+}
+
+export class ForbiddenError extends AppError {
+  constructor(message = 'You do not have permission to perform this action') {
+    super(message, 403);
+  }
+}
+
+export class ValidationError extends AppError {
+  constructor(message = 'Invalid request data') {
+    super(message, 400);
+  }
+}
+
+export class ConflictError extends AppError {
+  constructor(message = 'The request could not be completed due to a conflict') {
+    super(message, 409);
+  }
+}
