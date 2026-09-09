@@ -25,6 +25,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Archives
+ARCHITECTURE.md
+PROJECT_SPECIFICATION.md
+
 # Editor / OS
 .vscode/*
 !.vscode/extensions.json
